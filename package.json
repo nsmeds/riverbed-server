@@ -5,10 +5,9 @@
   "main": "server.js",
   "scripts": {
     "pretest": "npm run lint",
-    "test": "MONGODB_URI=mongodb://localhost/riverbed-test mocha",
-    "test:run": "mocha",
+    "test": "mocha",
     "test:watch": "npm run test:run -- -w",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "lint": "eslint ."
   },
   "author": "",
