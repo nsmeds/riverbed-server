@@ -38,7 +38,7 @@ describe('post api', () => {
 
     const testPost = {
         title: 'Test Post',
-        content: 'The content of the test post'
+        text: 'The text content of the test post'
     };
 
     const testAuthor = {

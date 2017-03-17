@@ -19,6 +19,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.2.1",
+    "jsonwebtoken-promisified": "^1.0.3",
     "mongoose": "^4.7.5"
   },
   "devDependencies": {
