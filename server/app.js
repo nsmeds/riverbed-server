@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const errorHandler = require('./error-handler');
-// const bodyParser = require('body-parser');
 
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
@@ -23,14 +23,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static('../../riverbed/dist'));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 app.use('/api/auth', auth);
-// app.use('/api/users', users);
 app.use('/api/posts', posts);
 app.use('/api/issues', issues);
 app.use('/api/authors', authors);
 
+app.get('*', function(req, res) {
+    res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+});
+
 app.use(errorHandler);
-// app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 module.exports = app;

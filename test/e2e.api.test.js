@@ -4,8 +4,8 @@ const chaiHttp = require('chai-http');
 const assert = chai.assert;
 chai.use(chaiHttp);
 
-const connection = require('../lib/setup-mongoose');
-const app = require('../lib/app');
+const connection = require('../server/setup-mongoose');
+const app = require('../server/app');
 
 describe('post api', () => {
 

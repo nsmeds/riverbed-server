@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const scrt = process.env.SCRT || 'scrt';
+const scrt = process.env.SCRT;
 
 module.exports = {
     sign(user) {

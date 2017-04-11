@@ -1,7 +1,7 @@
 const http = require('http');
-const app = require('./lib/app');
-const port = process.env.PORT || 3001;
-require('./lib/setup-mongoose');
+const app = require('./server/app');
+const port = process.env.PORT || 5000;
+require('./server/setup-mongoose');
 
 const server = http.createServer(app);
 
