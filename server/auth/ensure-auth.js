@@ -4,6 +4,7 @@ module.exports = function getEnsureAuth() {
     return function ensureAuth(req, res, next) {
         if(req.method === 'OPTIONS') return next();
         const accessToken = req.get('Authorization');
+        console.log(accessToken);
         if(!accessToken) return next({ code: 400, error: 'Unauthorized, no token provided'});
         token.verify(accessToken)
             .then(payload => {

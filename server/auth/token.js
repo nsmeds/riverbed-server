@@ -6,7 +6,8 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const payload = {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                roles: user.roles
             };
 
             jwt.sign(payload, scrt, null, (err, token) => {
