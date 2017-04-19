@@ -25,23 +25,23 @@ router
     //         .then(users => res.send(users))
     //         .catch(next);
     // })
-    // .post('/signup', bodyParser, hasUsernameAndPassword, (req, res, next) => {
-    //     const data = req.body;
-    //     delete req.body;
+    .post('/signup', bodyParser, hasUsernameAndPassword, (req, res, next) => {
+        const data = req.body;
+        delete req.body;
 
-    //     User.find({ username: data.username }).count()
-    //         .then(count => {
-    //             if(count > 0) throw {
-    //                 code: 400,
-    //                 error: `username ${data.username} already exists`
-    //             };
+        User.find({ username: data.username }).count()
+            .then(count => {
+                if(count > 0) throw {
+                    code: 400,
+                    error: `username ${data.username} already exists`
+                };
 
-    //             return new User(data).save();
-    //         })
-    //         .then(user => token.sign(user))
-    //         .then(token => res.send({ token }))
-    //         .catch(next);
-    // })
+                return new User(data).save();
+            })
+            .then(user => token.sign(user))
+            .then(token => res.send({ token }))
+            .catch(next);
+    })
     .post('/signin', bodyParser, hasUsernameAndPassword, (req, res, next) => {
         const { username, password } = req.body;
         delete req.body.password;
