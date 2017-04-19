@@ -4,6 +4,7 @@ const bodyParser = require('body-parser').json();
 const token = require('../auth/token');
 const User = require('../models/user');
 const ensureAuth = require('../auth/ensure-auth')();
+const ensureRole = require('../auth/ensure-role');
 
 function hasUsernameAndPassword(req, res, next) {
     const user = req.body;
@@ -20,11 +21,11 @@ router
     .get('/verify', ensureAuth, (req, res) => {
         res.status(200).send({ success: true });
     })
-    // .get('/users', (req, res, next) => {
-    //     User.find()
-    //         .then(users => res.send(users))
-    //         .catch(next);
-    // })
+    .get('/users', (req, res, next) => {
+        User.find()
+            .then(users => res.send(users))
+            .catch(next);
+    })
     .post('/signup', bodyParser, hasUsernameAndPassword, (req, res, next) => {
         const data = req.body;
         delete req.body;
