@@ -10,7 +10,7 @@ module.exports = {
                 roles: user.roles
             };
             const options = {
-                'expiresIn': '1h'
+                'expiresIn': '1d'
             };
 
             jwt.sign(payload, scrt, options, (err, token) => {
