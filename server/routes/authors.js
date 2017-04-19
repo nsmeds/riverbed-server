@@ -3,7 +3,8 @@ const router = express.Router();
 const Author = require('../models/author');
 const Post = require('../models/post');
 const bodyParser = require('body-parser').json();
-// const ensureRole = require('../auth/ensure-role');
+const ensureAuth = require('../auth/ensure-auth')();
+const ensureRole = require('../auth/ensure-role');
 
 router
     .get('/', (req, res, next) => {
@@ -47,7 +48,7 @@ router
         //     });
     })
 
-    .post('/', bodyParser, (req, res, next) => {
+    .post('/', ensureAuth, ensureRole('admin'), bodyParser, (req, res, next) => {
         new Author(req.body).save()
             .then(saved => res.send(saved))
             .catch(err => {
@@ -56,7 +57,7 @@ router
             });
     })
 
-    .put('/:id', bodyParser, (req, res, next) => {
+    .put('/:id', ensureAuth, ensureRole('admin'), bodyParser, (req, res, next) => {
         Author.findByIdAndUpdate(req.params.id, req.body)
             .then(saved => res.send(saved))
             .catch(err => {
@@ -65,7 +66,7 @@ router
             });
     })
 
-    .delete('/:id', (req, res, next) => {
+    .delete('/:id', ensureAuth, ensureRole('admin'), (req, res, next) => {
         Author.findByIdAndRemove(req.params.id)
             .then(deleted => res.send(deleted))
             .catch(err => {

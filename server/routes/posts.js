@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/post');
 const bodyParser = require('body-parser').json();
+const ensureAuth = require('../auth/ensure-auth')();
+const ensureRole = require('../auth/ensure-role');
 
 router
     .get('/', (req, res, next) => {
@@ -27,7 +29,7 @@ router
                 next(err);
             });
     })
-    .post('/', bodyParser, (req, res, next) => {
+    .post('/', ensureAuth, ensureRole('admin'), bodyParser, (req, res, next) => {
         new Post(req.body).save()
             .then(newPost => {
                 Post.findById(newPost._id)
@@ -40,7 +42,7 @@ router
                 next(err);
             });
     })
-    .put('/:id', bodyParser, (req, res, next) => {
+    .put('/:id', ensureAuth, ensureRole('admin'), bodyParser, (req, res, next) => {
         Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
             .then(saved => res.send(saved))
             .catch(err => {
@@ -48,7 +50,7 @@ router
                 next(err);
             });
     })
-    .delete('/:id', (req, res, next) => {
+    .delete('/:id', ensureAuth, ensureRole('admin'), (req, res, next) => {
         Post.findByIdAndRemove(req.params.id)
             .then(deleted => res.send(deleted))
             .catch(err => {

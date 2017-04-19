@@ -6,10 +6,11 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const payload = {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                roles: user.roles
             };
             const options = {
-                'expiresIn': '1h'
+                'expiresIn': '1d'
             };
 
             jwt.sign(payload, scrt, options, (err, token) => {

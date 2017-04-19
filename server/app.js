@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const errorHandler = require('./error-handler');
+const ensureRole = require('./auth/ensure-role.js');
+const ensureAuth = require('./auth/ensure-auth.js')();
 
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
