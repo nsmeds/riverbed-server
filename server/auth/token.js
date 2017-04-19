@@ -8,8 +8,11 @@ module.exports = {
                 id: user._id,
                 username: user.username
             };
+            const options = {
+                'expiresIn': '1h'
+            };
 
-            jwt.sign(payload, scrt, null, (err, token) => {
+            jwt.sign(payload, scrt, options, (err, token) => {
                 if (err) return reject('error signing token', err);
                 const profile = {
                     token: token,
