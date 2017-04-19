@@ -21,7 +21,7 @@ router
     .get('/verify', ensureAuth, (req, res) => {
         res.status(200).send({ success: true });
     })
-    .get('/users', (req, res, next) => {
+    .get('/users', ensureAuth, ensureRole('admin'), (req, res, next) => {
         User.find()
             .then(users => res.send(users))
             .catch(next);
@@ -63,7 +63,8 @@ router
                 res.send({
                     token: profile.token,
                     id: profile.payload.id,
-                    username: profile.payload.username
+                    username: profile.payload.username,
+                    roles: profile.payload.roles
                 });
             })
             .catch(next);
