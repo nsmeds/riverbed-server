@@ -59,7 +59,7 @@ router
             });
     })
 
-    .put('/:id', bodyParser, (req, res, next) => {
+    .put('/:id', ensureAuth, ensureRole('admin'), bodyParser, (req, res, next) => {
 
         const id = req.params.id;
 
