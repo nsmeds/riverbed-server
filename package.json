@@ -4,7 +4,7 @@
   "description": "Backend server for the Riverbed application.",
   "main": "server.js",
   "engines": {
-    "node": "6.9.x"
+    "node": "6.11.1"
   },
   "scripts": {
     "pretest": "npm run lint",
